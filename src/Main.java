@@ -1,36 +1,21 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.*;
-
 public class Main {
-  //Prueba Commit
-  private static final String URL = "jdbc:derby:C:/Users/Ricardo/MiProyectoDB";
-
   public static void main(String[] args) {
-    insertarBoli("Fresa", 15.50);
-  }
 
-  public static void insertarBoli(String sabor, double precio) {
-    String sql = "INSERT INTO bolis (sabor, precio) VALUES (?, ?)";
 
-    try {
-      Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-    } catch (ClassNotFoundException e) {
-      System.err.println("¡No se encontró el Driver!");
-    }
+    BoliDAO gerente = new BoliDAO();
 
-    try (Connection conn = DriverManager.getConnection(URL);
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+   // gerente.eliminarBoli(301);
+   // gerente.eliminarBoli(401);
+  // gerente.eliminarBoli(502);
+  //  gerente.eliminarBoli(505);
+  //  gerente.eliminarBoli(101);
+  //  gerente.eliminarBoli(201);
 
-      pstmt.setString(1, sabor);
-      pstmt.setDouble(2, precio);
-      pstmt.executeUpdate();
-      System.out.println("¡Éxito!");
+    // Si quieren agregar un sabor nuevo, solo tienen que descomentar esta línea:
+    // gerente.insertarBoli("Vainilla", 14.50);
 
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+
+    System.out.println("\n--- INVENTARIO DE BOLIS ACTUALIZADO ---");
+    gerente.listarBolis();
   }
 }

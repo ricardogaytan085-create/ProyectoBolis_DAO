@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Apr 27 18:17:51 CST 2026:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-019d-d173-0ec3-00000e4de328 
+on database directory C:\Users\Ricardo\MiProyectoDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@14dad5dc 
+Loaded from file:/C:/Users/Ricardo/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=25.0.2+10-69
+user.dir=C:\Users\Ricardo\IdeaProjects\TestJDBC
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
