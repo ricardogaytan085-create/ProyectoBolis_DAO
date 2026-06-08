@@ -10,6 +10,7 @@ import com.uaemex.bolis.model.VentaDAO;
 import com.uaemex.bolis.view.AdminView;
 import com.uaemex.bolis.view.EmpleadoView;
 import com.uaemex.bolis.view.LoginView;
+import com.uaemex.bolis.view.RegisterView;
 import javafx.stage.Stage;
 
 import java.nio.file.Path;
@@ -32,7 +33,11 @@ public class AppController {
     }
 
     private void login(String msg) {
-        stage.setScene(LoginView.scene(msg, this::autenticar));
+        stage.setScene(LoginView.scene(msg, this::autenticar, () -> registro("")));
+    }
+
+    private void registro(String msg) {
+        stage.setScene(RegisterView.scene(msg, f -> run(() -> usuarios.registrar(f.login(), f.password(), f.nombres(), f.paterno(), f.materno(), f.fecha(), f.email(), f.telefono()), "Cuenta creada", this::login), () -> login("")));
     }
 
     private void empleado(String msg) {
@@ -45,8 +50,8 @@ public class AppController {
 
     private void admin(String msg) {
         stage.setScene(AdminView.scene(usuario, usuarios.listar(), bolis.listar(), msg,
-                f -> run(() -> usuarios.guardar(f.login(), f.password(), f.nombre(), f.rol()), "Usuario guardado", this::admin),
-                f -> run(() -> usuarios.actualizar(id(f.id()), f.login(), f.password(), f.nombre(), f.rol()), "Usuario actualizado", this::admin),
+                f -> run(() -> usuarios.guardar(f.login(), f.password(), f.nombre(), f.email(), f.telefono(), f.rol()), "Usuario guardado", this::admin),
+                f -> run(() -> usuarios.actualizar(id(f.id()), f.login(), f.password(), f.nombre(), f.email(), f.telefono(), f.rol()), "Usuario actualizado", this::admin),
                 s -> run(() -> usuarios.eliminar(id(s)), "Usuario eliminado", this::admin),
                 f -> run(() -> bolis.guardar(f.sabor(), dec(f.precio()), id(f.stock())), "Boli guardado", this::admin),
                 f -> run(() -> bolis.actualizar(id(f.id()), f.sabor(), dec(f.precio()), id(f.stock())), "Boli actualizado", this::admin),
