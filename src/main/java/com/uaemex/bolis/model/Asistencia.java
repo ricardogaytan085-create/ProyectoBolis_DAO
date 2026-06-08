@@ -10,4 +10,9 @@ public record Asistencia(int id, int usuarioId, LocalDate fecha, LocalTime horaE
             throw new IllegalArgumentException("Horario de asistencia invalido");
         }
     }
+
+    @Override
+    public String toString() {
+        return id + " | usuario " + usuarioId + " | " + fecha + " | " + horaEntrada + " | " + horaSalida;
+    }
 }

@@ -6,4 +6,9 @@ public record Boli(int id, String sabor, double precio, int stock) {
             throw new IllegalArgumentException("Datos de boli invalidos");
         }
     }
+
+    @Override
+    public String toString() {
+        return id + " | " + sabor + " | $" + precio + " | stock " + stock;
+    }
 }

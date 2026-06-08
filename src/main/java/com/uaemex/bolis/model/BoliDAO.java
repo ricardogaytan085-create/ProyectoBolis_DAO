@@ -22,17 +22,17 @@ public class BoliDAO {
     public void actualizar(int id, String sabor, double precio, int stock) {
         validarId(id);
         validar(sabor, precio, stock);
-        run("No se actualizo el boli", () -> Database.update("UPDATE bolis SET sabor=?, precio=?, stock=? WHERE id=?", p -> {
+        run("No se actualizo el boli", () -> Database.requireUpdated(Database.update("UPDATE bolis SET sabor=?, precio=?, stock=? WHERE id=?", p -> {
             p.setString(1, sabor);
             p.setDouble(2, precio);
             p.setInt(3, stock);
             p.setInt(4, id);
-        }));
+        }), "Boli no existe"));
     }
 
     public void eliminar(int id) {
         validarId(id);
-        run("No se elimino el boli", () -> Database.update("DELETE FROM bolis WHERE id=?", p -> p.setInt(1, id)));
+        run("No se elimino el boli", () -> Database.requireUpdated(Database.update("DELETE FROM bolis WHERE id=?", p -> p.setInt(1, id)), "Boli no existe"));
     }
 
     public Optional<Boli> buscar(int id) {

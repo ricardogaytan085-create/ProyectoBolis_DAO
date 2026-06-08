@@ -40,7 +40,7 @@ public class UsuarioDAO {
     public void actualizar(int id, String login, String password, String nombre, String email, String telefono, String rol) {
         validarId(id);
         Usuario u = validar(login, password, nombre, "General", "Usuario", LocalDate.of(2000, 1, 1), email, telefono, rol);
-        run("No se actualizo el usuario", () -> Database.update("UPDATE usuarios SET login=?, password=?, nombre=?, nombres=?, apellido_paterno=?, apellido_materno=?, fecha_nacimiento=?, email=?, telefono=?, rol=? WHERE id=?", p -> {
+        run("No se actualizo el usuario", () -> Database.requireUpdated(Database.update("UPDATE usuarios SET login=?, password=?, nombre=?, nombres=?, apellido_paterno=?, apellido_materno=?, fecha_nacimiento=?, email=?, telefono=?, rol=? WHERE id=?", p -> {
             p.setString(1, login);
             p.setString(2, Passwords.hash(password));
             p.setString(3, u.nombre());
@@ -52,12 +52,12 @@ public class UsuarioDAO {
             p.setString(9, telefono);
             p.setString(10, rol);
             p.setInt(11, id);
-        }));
+        }), "Usuario no existe"));
     }
 
     public void eliminar(int id) {
         validarId(id);
-        run("No se elimino el usuario", () -> Database.update("DELETE FROM usuarios WHERE id=?", p -> p.setInt(1, id)));
+        run("No se elimino el usuario", () -> Database.requireUpdated(Database.update("DELETE FROM usuarios WHERE id=?", p -> p.setInt(1, id)), "Usuario no existe"));
     }
 
     public Optional<Usuario> login(String login, String password) {

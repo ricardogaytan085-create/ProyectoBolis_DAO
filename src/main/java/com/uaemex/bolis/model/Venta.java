@@ -8,4 +8,9 @@ public record Venta(int id, int boliId, int usuarioId, int cantidad, double tota
             throw new IllegalArgumentException("Venta invalida");
         }
     }
+
+    @Override
+    public String toString() {
+        return id + " | boli " + boliId + " | " + cantidad + " | $" + totalVenta + " | " + fechaHora;
+    }
 }

@@ -20,6 +20,11 @@ public record Usuario(int id, String login, String password, String nombres, Str
         return (nombres + " " + apellidoPaterno + " " + apellidoMaterno).trim();
     }
 
+    @Override
+    public String toString() {
+        return id + " | " + nombre() + " | " + email + " | " + rol;
+    }
+
     private static boolean blank(String s) {
         return s == null || s.isBlank();
     }

@@ -7,7 +7,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 
 public class EmpleadoView {
     private static final DateTimeFormatter F = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -24,7 +23,10 @@ public class EmpleadoView {
         Label reloj = new Label();
         Label info = Ui.message(msg);
         TextField boliId = Ui.field("ID boli"), cantidad = Ui.field("Cantidad");
-        TextArea lista = Ui.area(bolis.stream().map(b -> b.id() + " | " + b.sabor() + " | $" + b.precio() + " | stock " + b.stock()).collect(Collectors.joining("\n")));
+        ListView<Boli> lista = Ui.listView(bolis);
+        lista.getSelectionModel().selectedItemProperty().addListener((obs, old, b) -> {
+            if (b != null) boliId.setText(String.valueOf(b.id()));
+        });
         Timeline t = new Timeline(new KeyFrame(Duration.ZERO, e -> reloj.setText(F.format(LocalDateTime.now()))), new KeyFrame(Duration.seconds(1)));
         t.setCycleCount(Animation.INDEFINITE);
         t.play();

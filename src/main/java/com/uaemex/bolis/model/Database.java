@@ -42,6 +42,11 @@ public class Database {
         }
     }
 
+    public static int requireUpdated(int rows, String message) {
+        if (rows == 0) throw new IllegalArgumentException(message);
+        return rows;
+    }
+
     public static <T> Optional<T> find(String sql, Binder binder, RowMapper<T> mapper) throws SQLException {
         try (Connection c = connect()) {
             return find(c, sql, binder, mapper);
