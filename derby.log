@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Mon Apr 27 18:17:51 CST 2026:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-019d-d173-0ec3-00000e4de328 
-on database directory C:\Users\Ricardo\MiProyectoDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@14dad5dc 
-Loaded from file:/C:/Users/Ricardo/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+Mon Jun 08 12:18:06 CST 2026:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-019e-a874-c883-00000e639a20 
+on database directory memory:C:\Users\hecto\Documents\uaemex\paradigmas\ProyectoBolis_DAO\bolisTest596147595072200 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
+Loaded from file:/C:/Users/hecto/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=25.0.2+10-69
-user.dir=C:\Users\Ricardo\IdeaProjects\TestJDBC
+java.runtime.version=21.0.10+8-LTS-217
+user.dir=C:\Users\hecto\Documents\uaemex\paradigmas\ProyectoBolis_DAO
 os.name=Windows 11
 os.arch=amd64
 os.version=10.0

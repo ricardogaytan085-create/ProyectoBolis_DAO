@@ -5,11 +5,10 @@ import com.uaemex.bolis.model.Usuario;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
 import java.time.LocalDateTime;
@@ -23,24 +22,15 @@ public class EmpleadoView {
 
     public static Scene scene(Usuario u, List<Boli> bolis, String msg, Runnable entrada, Runnable salida, BiConsumer<Integer, Integer> vender, Runnable salir) {
         Label reloj = new Label();
-        Label info = new Label(msg);
-        TextField boliId = new TextField();
-        TextField cantidad = new TextField();
-        TextArea lista = new TextArea(bolis.stream().map(b -> b.id() + " | " + b.sabor() + " | $" + b.precio() + " | stock " + b.stock()).collect(Collectors.joining("\n")));
-        Button in = new Button("Entrada"), out = new Button("Salida"), sale = new Button("Vender"), logout = new Button("Salir");
+        Label info = Ui.message(msg);
+        TextField boliId = Ui.field("ID boli"), cantidad = Ui.field("Cantidad");
+        TextArea lista = Ui.area(bolis.stream().map(b -> b.id() + " | " + b.sabor() + " | $" + b.precio() + " | stock " + b.stock()).collect(Collectors.joining("\n")));
         Timeline t = new Timeline(new KeyFrame(Duration.ZERO, e -> reloj.setText(F.format(LocalDateTime.now()))), new KeyFrame(Duration.seconds(1)));
         t.setCycleCount(Animation.INDEFINITE);
         t.play();
-        lista.setEditable(false);
-        boliId.setPromptText("ID boli");
-        cantidad.setPromptText("Cantidad");
-        in.setOnAction(e -> entrada.run());
-        out.setOnAction(e -> salida.run());
-        logout.setOnAction(e -> salir.run());
-        sale.setOnAction(e -> venta(boliId, cantidad, vender, info));
-        VBox root = new VBox(10, new Label("Empleado: " + u.nombre()), reloj, new HBox(10, in, out, logout), lista, new HBox(10, boliId, cantidad, sale), info);
-        root.setPadding(new Insets(15));
-        return new Scene(root, 520, 420);
+        return Ui.scene(Ui.root(Ui.title("Empleado: " + u.nombre()), reloj,
+                Ui.row(Ui.button("Entrada", entrada), Ui.button("Salida", salida), Ui.button("Salir", salir)),
+                lista, Ui.row(boliId, cantidad, Ui.button("Vender", () -> venta(boliId, cantidad, vender, info))), info), 520, 420);
     }
 
     private static void venta(TextField boliId, TextField cantidad, BiConsumer<Integer, Integer> vender, Label info) {

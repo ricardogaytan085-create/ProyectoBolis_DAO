@@ -1,0 +1,30 @@
+.root-pane {
+    -fx-padding: 16;
+    -fx-spacing: 10;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.message {
+    -fx-text-fill: #374151;
+}
+
+.row {
+    -fx-spacing: 10;
+}
+
+.tight-row {
+    -fx-spacing: 5;
+}
+
+.section {
+    -fx-spacing: 5;
+}
+
+.small-field {
+    -fx-pref-width: 80;
+}

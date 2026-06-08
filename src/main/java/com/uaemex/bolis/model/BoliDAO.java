@@ -1,7 +1,7 @@
 package com.uaemex.bolis.model;
 
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -12,67 +12,36 @@ public class BoliDAO {
 
     public void guardar(String sabor, double precio, int stock) {
         validar(sabor, precio, stock);
-        try (Connection c = Database.connect(); PreparedStatement p = c.prepareStatement("INSERT INTO bolis(sabor,precio,stock) VALUES(?,?,?)")) {
+        run("No se guardo el boli", () -> Database.update("INSERT INTO bolis(sabor,precio,stock) VALUES(?,?,?)", p -> {
             p.setString(1, sabor);
             p.setDouble(2, precio);
             p.setInt(3, stock);
-            p.executeUpdate();
-        } catch (SQLException e) {
-            LOG.log(Level.SEVERE, "No se guardo el boli", e);
-            throw new RuntimeException("No se guardo el boli", e);
-        }
+        }));
     }
 
     public void actualizar(int id, String sabor, double precio, int stock) {
         validarId(id);
         validar(sabor, precio, stock);
-        try (Connection c = Database.connect(); PreparedStatement p = c.prepareStatement("UPDATE bolis SET sabor=?, precio=?, stock=? WHERE id=?")) {
+        run("No se actualizo el boli", () -> Database.update("UPDATE bolis SET sabor=?, precio=?, stock=? WHERE id=?", p -> {
             p.setString(1, sabor);
             p.setDouble(2, precio);
             p.setInt(3, stock);
             p.setInt(4, id);
-            p.executeUpdate();
-        } catch (SQLException e) {
-            LOG.log(Level.SEVERE, "No se actualizo el boli", e);
-            throw new RuntimeException("No se actualizo el boli", e);
-        }
+        }));
     }
 
     public void eliminar(int id) {
         validarId(id);
-        try (Connection c = Database.connect(); PreparedStatement p = c.prepareStatement("DELETE FROM bolis WHERE id=?")) {
-            p.setInt(1, id);
-            p.executeUpdate();
-        } catch (SQLException e) {
-            LOG.log(Level.SEVERE, "No se elimino el boli", e);
-            throw new RuntimeException("No se elimino el boli", e);
-        }
+        run("No se elimino el boli", () -> Database.update("DELETE FROM bolis WHERE id=?", p -> p.setInt(1, id)));
     }
 
     public Optional<Boli> buscar(int id) {
         validarId(id);
-        try (Connection c = Database.connect(); PreparedStatement p = c.prepareStatement("SELECT * FROM bolis WHERE id=?")) {
-            p.setInt(1, id);
-            try (ResultSet r = p.executeQuery()) {
-                return r.next() ? Optional.of(boli(r)) : Optional.empty();
-            }
-        } catch (SQLException e) {
-            LOG.log(Level.SEVERE, "No se leyo el boli", e);
-            throw new RuntimeException("No se leyo el boli", e);
-        }
+        return run("No se leyo el boli", () -> Database.find("SELECT * FROM bolis WHERE id=?", p -> p.setInt(1, id), this::boli));
     }
 
     public List<Boli> listar() {
-        List<Boli> lista = new ArrayList<>();
-        try (Connection c = Database.connect();
-             Statement s = c.createStatement();
-             ResultSet r = s.executeQuery("SELECT * FROM bolis ORDER BY id")) {
-            while (r.next()) lista.add(boli(r));
-            return lista;
-        } catch (SQLException e) {
-            LOG.log(Level.SEVERE, "No se leyeron bolis", e);
-            throw new RuntimeException("No se leyeron bolis", e);
-        }
+        return run("No se leyeron bolis", () -> Database.list("SELECT * FROM bolis ORDER BY id", this::boli));
     }
 
     private Boli boli(ResultSet r) throws SQLException {
@@ -85,5 +54,19 @@ public class BoliDAO {
 
     private void validarId(int id) {
         if (id <= 0) throw new IllegalArgumentException("Id invalido");
+    }
+
+    private <T> T run(String error, DbCall<T> call) {
+        try {
+            return call.run();
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, error, e);
+            throw new RuntimeException(error, e);
+        }
+    }
+
+    @FunctionalInterface
+    private interface DbCall<T> {
+        T run() throws SQLException;
     }
 }
