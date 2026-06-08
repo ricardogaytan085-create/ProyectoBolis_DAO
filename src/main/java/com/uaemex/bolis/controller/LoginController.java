@@ -19,9 +19,13 @@ public class LoginController {
     }
 
     private void login(String usuario, String password) {
-        usuarios.login(usuario, password).ifPresentOrElse(u -> {
-            if ("Administrador".equalsIgnoreCase(u.rol())) app.admin(u, "");
-            else app.empleado(u, "");
-        }, () -> show("Datos incorrectos"));
+        try {
+            usuarios.login(usuario, password).ifPresentOrElse(u -> {
+                if ("Administrador".equalsIgnoreCase(u.rol())) app.admin(u, "");
+                else app.empleado(u, "");
+            }, () -> show("Datos incorrectos"));
+        } catch (IllegalArgumentException e) {
+            show("Datos incorrectos");
+        }
     }
 }

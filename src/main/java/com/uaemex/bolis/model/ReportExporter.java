@@ -5,8 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ReportExporter {
+    private static final Logger LOG = Logger.getLogger(ReportExporter.class.getName());
     private final VentaDAO ventas = new VentaDAO();
     private final AsistenciaDAO asistencias = new AsistenciaDAO();
 
@@ -23,10 +26,12 @@ public class ReportExporter {
     }
 
     private Path write(Path path, List<String> lines, String error) {
+        if (path == null) throw new IllegalArgumentException("Ruta invalida");
         try {
             if (path.getParent() != null) Files.createDirectories(path.getParent());
             return Files.write(path, lines);
         } catch (IOException e) {
+            LOG.log(Level.SEVERE, error, e);
             throw new RuntimeException(error, e);
         }
     }
