@@ -1,0 +1,77 @@
+.app-root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-padding: 18;
+    -fx-background-color: linear-gradient(to bottom right, #e9fff8, #fff3f0);
+}
+
+.title {
+    -fx-text-fill: #153c3b;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+}
+
+.message {
+    -fx-text-fill: #4f6b67;
+    -fx-font-weight: 600;
+}
+
+.field-label {
+    -fx-text-fill: #365c58;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.form-grid {
+    -fx-padding: 2 0 4 0;
+}
+
+.text-field,
+.password-field,
+.list-view {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-border-color: #a8e8d7;
+    -fx-border-radius: 8;
+    -fx-border-width: 1.2;
+    -fx-padding: 8 10;
+    -fx-prompt-text-fill: #82a39d;
+}
+
+.text-field:focused,
+.password-field:focused,
+.list-view:focused {
+    -fx-border-color: #ff7f73;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(255, 127, 115, 0.25), 10, 0.25, 0, 0);
+}
+
+.button {
+    -fx-background-color: #ff7f73;
+    -fx-background-radius: 999;
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+    -fx-padding: 8 14;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(21, 60, 59, 0.16), 7, 0.2, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: #ff675c;
+    -fx-translate-y: -1;
+    -fx-effect: dropshadow(gaussian, rgba(21, 60, 59, 0.22), 11, 0.25, 0, 3);
+}
+
+.button:pressed {
+    -fx-background-color: #e9534a;
+    -fx-translate-y: 0;
+}
+
+.card {
+    -fx-padding: 12;
+    -fx-background-color: rgba(255, 255, 255, 0.92);
+    -fx-background-radius: 10;
+    -fx-border-color: #b6f0df;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(21, 60, 59, 0.18), 14, 0.18, 0, 4);
+}

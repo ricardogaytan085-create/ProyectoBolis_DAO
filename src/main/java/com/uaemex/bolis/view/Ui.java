@@ -8,48 +8,50 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public final class Ui {
-    private static final String FONT = "-fx-font-family:'Segoe UI',Arial,sans-serif;";
-    private static final String CONTROL = "-fx-background-color:white;-fx-background-radius:8;-fx-border-color:#cbd5e1;-fx-border-radius:8;-fx-padding:8 10;-fx-prompt-text-fill:#94a3b8;";
-    private static final String BUTTON = "-fx-background-color:#4f46e5;-fx-background-radius:999;-fx-text-fill:white;-fx-font-weight:700;-fx-padding:8 14;-fx-cursor:hand;";
+    private static final String STYLESHEET = "/styles.css";
 
     private Ui() {}
 
     public static Scene scene(VBox root, int width, int height) {
         root.setSpacing(12);
-        root.setStyle(FONT + "-fx-padding:18;-fx-background-color:#f8fafc;-fx-font-size:13px;");
-        return new Scene(root, width, height);
+        root.getStyleClass().add("app-root");
+        Scene scene = new Scene(root, width, height);
+        scene.getStylesheets().add(Ui.class.getResource(STYLESHEET).toExternalForm());
+        return scene;
     }
 
     public static Label title(String text) {
         Label label = new Label(text);
-        label.setTextFill(Color.web("#111827"));
-        label.setStyle(FONT + "-fx-font-size:18px;-fx-font-weight:700;");
+        label.getStyleClass().add("title");
         return label;
     }
 
     public static Label message(String text) {
         Label label = new Label(text);
-        label.setTextFill(Color.web("#4b5563"));
-        label.setStyle(FONT + "-fx-font-weight:600;");
+        label.getStyleClass().add("message");
+        return label;
+    }
+
+    public static Label label(String text) {
+        Label label = new Label(text);
+        label.getStyleClass().add("field-label");
         return label;
     }
 
     public static TextField field(String prompt) {
         TextField field = new TextField();
         field.setPromptText(prompt);
-        field.setStyle(CONTROL);
         return field;
     }
 
     public static PasswordField password() {
         PasswordField field = new PasswordField();
         field.setPromptText("Password");
-        field.setStyle(CONTROL);
         return field;
     }
 
@@ -63,15 +65,11 @@ public final class Ui {
         ListView<T> list = new ListView<>();
         list.getItems().addAll(items);
         list.setPrefHeight(160);
-        list.setStyle(CONTROL);
         return list;
     }
 
     public static Button button(String text, Runnable action) {
         Button button = new Button(text);
-        button.setStyle(BUTTON);
-        button.setOnMouseEntered(e -> button.setStyle(BUTTON + "-fx-background-color:#4338ca;"));
-        button.setOnMouseExited(e -> button.setStyle(BUTTON));
         button.setOnAction(e -> action.run());
         return button;
     }
@@ -88,6 +86,23 @@ public final class Ui {
         return row;
     }
 
+    public static GridPane formGrid(Node... nodes) {
+        GridPane grid = new GridPane();
+        grid.setHgap(8);
+        grid.setVgap(6);
+        grid.getStyleClass().add("form-grid");
+        for (int i = 0; i < nodes.length; i += 4) {
+            int row = i / 4;
+            grid.add(nodes[i], 0, row);
+            grid.add(nodes[i + 1], 1, row);
+            if (i + 3 < nodes.length) {
+                grid.add(nodes[i + 2], 2, row);
+                grid.add(nodes[i + 3], 3, row);
+            }
+        }
+        return grid;
+    }
+
     public static VBox root(Node... nodes) {
         return new VBox(nodes);
     }
@@ -95,7 +110,7 @@ public final class Ui {
     public static VBox box(String title, Node... nodes) {
         VBox box = new VBox(title(title));
         box.setSpacing(8);
-        box.setStyle("-fx-padding:12;-fx-background-color:white;-fx-background-radius:10;-fx-border-color:#e5e7eb;-fx-border-radius:10;");
+        box.getStyleClass().add("card");
         box.getChildren().addAll(nodes);
         return box;
     }

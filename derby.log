@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Mon Jun 08 14:02:18 CST 2026:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-019e-a8d4-2d40-00000e1e5a78 
+Mon Jun 08 19:52:23 CST 2026:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-019e-aa14-b117-00000e1e40b8 
 on database directory C:\Users\hecto\Documents\uaemex\paradigmas\ProyectoBolis_DAO\bolisDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@14dad5dc 
 Loaded from file:/C:/Users/hecto/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
 java.vendor=Microsoft
