@@ -1,12 +1,12 @@
 ----------------------------------------------------------------
-Mon Jun 08 19:52:23 CST 2026:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-019e-aa14-b117-00000e1e40b8 
-on database directory C:\Users\hecto\Documents\uaemex\paradigmas\ProyectoBolis_DAO\bolisDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@14dad5dc 
-Loaded from file:/C:/Users/hecto/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+Tue Jun 09 23:39:33 CST 2026:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-019e-b00b-063e-00000e64bb78 
+on database directory C:\Users\olive\OneDrive\Documentos\ProgramasParadigmas\ProyectoBolis_DAO\bolisDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@14dad5dc 
+Loaded from file:/C:/Users/olive/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
 java.vendor=Microsoft
-java.runtime.version=25.0.3+9-LTS
-user.dir=C:\Users\hecto\Documents\uaemex\paradigmas\ProyectoBolis_DAO
-os.name=Windows 11
+java.runtime.version=25.0.2+10-LTS
+user.dir=C:\Users\olive\OneDrive\Documentos\ProgramasParadigmas\ProyectoBolis_DAO
+os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
