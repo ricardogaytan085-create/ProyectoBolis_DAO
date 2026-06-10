@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.util.function.BiConsumer;
-
+//Edición Ricardo
 public class LoginView {
     public static Scene scene(String msg, BiConsumer<String, String> entrar, Runnable registrar) {
         TextField login = Ui.field("Usuario");
