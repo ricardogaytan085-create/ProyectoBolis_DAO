@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+//Edicion Ricardo
 public class ModelSmokeTest {
     @Test
     void initVentaYReportes() throws Exception {
