@@ -1,7 +1,7 @@
 package com.uaemex.bolis.model;
 
 import java.time.LocalDate;
-
+//Editado Gwendy
 public record Usuario(int id, String login, String password, String nombres, String apellidoPaterno,
                       String apellidoMaterno, LocalDate fechaNacimiento, String email, String telefono, String rol) {
     public Usuario {
