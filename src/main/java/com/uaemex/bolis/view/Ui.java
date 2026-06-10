@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+//Edición Ricardo
 public final class Ui {
     private static final String STYLESHEET = "/styles.css";
 
