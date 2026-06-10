@@ -31,7 +31,7 @@ public class AppController {
         stage.setTitle("Proyecto Bolis");
         stage.show();
     }
-//Editado Gwendy
+//Editado Gwendy y Ricardo
     private void login(String msg) {
         stage.setScene(LoginView.scene(msg, this::autenticar, () -> registro("")));
     }
