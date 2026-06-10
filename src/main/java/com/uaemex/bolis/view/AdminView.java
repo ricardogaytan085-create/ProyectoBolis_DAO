@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 
 import java.util.List;
 import java.util.function.Consumer;
-
+//Editado Gwendy
 public class AdminView {
     public record UsuarioForm(String id, String login, String password, String nombre, String email, String telefono, String rol) {}
     public record BoliForm(String id, String sabor, String precio, String stock) {}
